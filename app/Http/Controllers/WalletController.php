@@ -73,10 +73,10 @@ class WalletController extends Controller
     }
     public function payment(Request $request, User $client)
     {
-      return $wallets = $client->wallets()
+      $wallets = $client->wallets()
         ->whereMonth('created_at', '=', Carbon::parse($request->date))
         ->orderBy('created_at','DESC')->delete();
-      //redireccionar
+      return redirect()->route('payments.list', $client->id);
     }
 
 }

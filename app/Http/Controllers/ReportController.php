@@ -27,7 +27,7 @@ class ReportController extends Controller
       ->whereDay('details.created_at', '=', $date)
       ->where('products.id',$request->product)
       ->get();
-    return $products;
+    return view('reports.sales',compact('products'));
   }
   public function day(Request $request)
   {
@@ -38,7 +38,7 @@ class ReportController extends Controller
       ->whereDay('details.created_at', '=', $date)
       ->where('products.id',$request->product)
       ->get();
-    return $products;
+    return view('reports.sales',compact('products'));
   }
   public function month(Request $request)
   {
@@ -49,7 +49,7 @@ class ReportController extends Controller
       ->whereMonth('details.created_at', '=', $date)
       ->where('products.id',$request->product)
       ->get();
-    return $products;
+    return view('reports.sales',compact('products'));
   }public function range(Request $request)
   {
     $from = Carbon::parse($request->star);

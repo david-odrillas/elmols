@@ -69,11 +69,11 @@ class SaleTest extends TestCase
       $this->actingAs($user);
       //crear Unidades;
       $maiz = Product::create([ 'name' => 'maiz']);
-      $maiz->units()->create(['volumen' => 'cuartilla','price' =>  5.5,'sponsor' => .25,'supsponsor' => .2]);
-      $maiz->units()->create(['volumen' => 'arroba','price' =>  10,'sponsor' => 1,'supsponsor' => .7]);
+      $maiz->units()->create(['volumen' => 'cuartilla','price' =>  5.5,'sponsor' => .25, 'quantity' => 6, 'supsponsor' => .2]);
+      $maiz->units()->create(['volumen' => 'arroba','price' =>  10, 'quantity' => 25, 'sponsor' => 1,'supsponsor' => .7]);
       $trigo = Product::create(['name' => 'trigo']);
-      $trigo->units()->create(['volumen' => 'cuartilla','price' =>  6,'sponsor' => .25,'supsponsor'=> .2]);
-      $trigo->units()->create(['volumen' => 'arroba','price' =>  11,'sponsor' => 1,'supsponsor' => .7]);
+      $trigo->units()->create(['volumen' => 'cuartilla','price' =>  6, 'quantity' => 6,'sponsor' => .25,'supsponsor'=> .2]);
+      $trigo->units()->create(['volumen' => 'arroba','price' =>  11, 'quantity' => 25,'sponsor' => 1,'supsponsor' => .7]);
       $this->get('/home')
         ->assertSee('Realizar Venta');
       $this->post('/sales',['amount' =>17.5, 'unit_id' => array(0 => '3', 1 => '1'), 'quantity' => array(0 => '2',1 => '1')] )->assertRedirect('sales');
@@ -96,11 +96,11 @@ class SaleTest extends TestCase
       $this->actingAs($user);
       //crear Unidades;
       $maiz = Product::create([ 'name' => 'maiz']);
-      $maiz->units()->create(['volumen' => 'cuartilla','price' =>  5.5,'sponsor' => .25,'supsponsor' => .2]);
-      $maiz->units()->create(['volumen' => 'arroba','price' =>  10,'sponsor' => 1,'supsponsor' => .7]);
+      $maiz->units()->create(['volumen' => 'cuartilla','price' =>  5.5,'sponsor' => .25, 'quantity' => 6, 'supsponsor' => .2]);
+      $maiz->units()->create(['volumen' => 'arroba','price' =>  10, 'quantity' => 25, 'sponsor' => 1,'supsponsor' => .7]);
       $trigo = Product::create(['name' => 'trigo']);
-      $trigo->units()->create(['volumen' => 'cuartilla','price' =>  6,'sponsor' => .25,'supsponsor'=> .2]);
-      $trigo->units()->create(['volumen' => 'arroba','price' =>  11,'sponsor' => 1,'supsponsor' => .7]);
+      $trigo->units()->create(['volumen' => 'cuartilla','price' =>  6, 'quantity' => 6,'sponsor' => .25,'supsponsor'=> .2]);
+      $trigo->units()->create(['volumen' => 'arroba','price' =>  11, 'quantity' => 25,'sponsor' => 1,'supsponsor' => .7]);
       $this->get('/home')
         ->assertSee('Realizar Venta');
       $this->post('/sales',['amount' =>17.5, 'unit_id' => array(0 => '3', 1 => '1'), 'quantity' => array(0 => '2',1 => '1')] )->assertRedirect('sales');
@@ -123,17 +123,29 @@ class SaleTest extends TestCase
       $this->get('/sales')
        ->assertSee('No hay Ventas Registradas');
     }
-    // public function testListNoEmpty()
-    // {
-    //   Product::create(['name' => 'maiz']);
-    //   Product::create(['name' => 'trigo']);
-    //   $permission = Permission::create(['name' => 'products.index']);
-    //   Role::create(['name' => 'admin'])
-    //     ->givePermissionTo($permission);
-    //   $user = factory(User::class)->create();
-    //   $user->assignRole('admin');
-    //   $this->actingAs($user);
-    //   $this->get('/products')
-    //    ->assertSee('MAIZ', 'TRIGO');
-    // }
+    public function testListNoEmpty()
+    {
+      $this->withoutExceptionHandling();
+      Permission::create(['name' => 'sales.index']);
+      Permission::create(['name' => 'sales.create']);
+      Role::create(['name' => 'admin'])
+        ->givePermissionTo(Permission::all());
+      $user = factory(User::class)->create();
+      $user->assignRole('admin');
+      $this->actingAs($user);
+      $this->get('/home')->assertSee('Ventas');
+      //crear Unidades;
+      $maiz = Product::create([ 'name' => 'maiz']);
+      $maiz->units()->create(['volumen' => 'cuartilla','price' =>  5.5,'sponsor' => .25, 'quantity' => 6, 'supsponsor' => .2]);
+      $maiz->units()->create(['volumen' => 'arroba','price' =>  10, 'quantity' => 25, 'sponsor' => 1,'supsponsor' => .7]);
+      $trigo = Product::create(['name' => 'trigo']);
+      $trigo->units()->create(['volumen' => 'cuartilla','price' =>  6, 'quantity' => 6,'sponsor' => .25,'supsponsor'=> .2]);
+      $trigo->units()->create(['volumen' => 'arroba','price' =>  11, 'quantity' => 25,'sponsor' => 1,'supsponsor' => .7]);
+      $this->get('/home')
+        ->assertSee('Realizar Venta');
+      $this->post('/sales',['amount' =>17.5, 'unit_id' => array(0 => '3', 1 => '1'), 'quantity' => array(0 => '2',1 => '1')] )->assertRedirect('sales');
+      //ver venta
+      $this->get('/sales')
+       ->assertSee('Cliente', 'FREDDY LUQUE');
+    }
 }

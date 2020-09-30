@@ -67,7 +67,7 @@ class ReferTest extends TestCase
     $user->assignRole($role);
     $this->actingAs($user);
     $this->get('clients')
-      ->assertSee('Ver Referidos');
+      ->assertSee('Referidos');
     $this->get('/clients/1/refers')
       ->assertSee(' No tiene Referidos.');
   }
@@ -90,7 +90,7 @@ class ReferTest extends TestCase
         'cell'   => '789456123'
       ])->assertRedirect('clients');
     $this->get('clients')
-      ->assertSee('Ver Referidos');
+      ->assertSee('Referidos');
     $this->get('/clients/1/refers')
       ->assertSee('SAINT LUQUE');
   }

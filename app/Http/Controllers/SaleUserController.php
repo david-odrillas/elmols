@@ -9,14 +9,14 @@ use Illuminate\Http\Request;
 use App\Http\Requests\Sale\StoreSale;
 use Illuminate\Support\Facades\DB;
 use App\Message;
-
+use Carbon\Carbon;
 class SaleUserController extends Controller
 {
     public function __construct()
     {
       $this->middleware('auth');
-      $this->middleware('permission:sales.index')->only(['index', 'search']);
-      $this->middleware('permission:sales.create')->only('store');
+      $this->middleware('permission:sales.index')->only('index');
+      $this->middleware('permission:sales.create')->only(['create','store']);
     }
     /**
      * Show the form for creating a new resource.
@@ -24,6 +24,15 @@ class SaleUserController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
+    public function index(User $client)
+    {
+      $date = Carbon::now();
+      $sales = $client->sales()
+        ->whereMonth('created_at', '=', $date)
+        ->orderBy('created_at', 'DESC')->paginate(10);
+      return view('sales.users', compact('sales','client'));
+    }
+
     public function create(User $client)
     {
       return view('sales.clients', compact('client'));
@@ -54,26 +63,20 @@ class SaleUserController extends Controller
           {
             $detail->wallets()->create([
               'user_id' => $client->sponsor->id,
-              'amount'  => Unit::find($request->unit_id[$i])->sponsor,
+              'amount'  => Unit::find($request->unit_id[$i])->sponsor * $request->quantity[$i],
             ]);
           }
           if($client->sponsor->sponsor)
           {
             $detail->wallets()->create([
               'user_id' => $client->sponsor->sponsor->id,
-              'amount'  => Unit::find($request->unit_id[$i])->supsponsor,
+              'amount'  => Unit::find($request->unit_id[$i])->supsponsor * $request->quantity[$i],
             ]);
           }
-
         }
       }, 2);
 
       Message::success('Venta Registrada');
       return redirect()->route('sales.index');
-
-      // if($client->sponsor->sponsor) return $client->sponsor->sponsor;
-      // return ' no tiene';
-      //return $client->sponsor->sponsor;
     }
-
 }

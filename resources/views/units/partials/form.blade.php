@@ -15,9 +15,22 @@
     <label for="price" class="col-md-2 col-form-label text-md-right">{{ __('Precio') }}</label>
 
     <div class="col-md-8">
-        <input id="price" type="text" class="form-control @error('price') is-invalid @enderror" name="price" value="{{ old('price', $unit->price) }}" required autocomplete="price" autofocus>
+        <input id="price" type="text" class="form-control @error('price') is-invalid @enderror" name="price" value="{{ old('price', $unit->price) }}" required autocomplete="price">
 
         @error('price')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+    </div>
+</div>
+<div class="form-group row">
+    <label for="quantity" class="col-md-2 col-form-label text-md-right">{{ __('Libras') }}</label>
+
+    <div class="col-md-8">
+        <input id="quantity" type="text" class="form-control @error('quantity') is-invalid @enderror" name="quantity" value="{{ old('quantity', $unit->quantity) }}" required>
+
+        @error('quantity')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
             </span>

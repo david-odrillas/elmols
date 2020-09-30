@@ -17,8 +17,10 @@ class DetailController extends Controller
     public function index(Sale $sale)
     {
 
-      return $sale->details()->join('units', 'details.unit_id','=', 'units.id')
-          ->select('quantity', 'units.volumen', 'units.price', DB::raw('units.price*quantity as total'))->get();
+      $details = $sale->details()->join('units', 'details.unit_id','=', 'units.id')
+          ->join('products', 'units.product_id', '=', 'products.id')
+          ->select('details.quantity', 'units.volumen', 'products.name','units.price', DB::raw('units.price*details.quantity as total'))->get();
+      return view('sales.details',compact('sale', 'details'));
     }
 
     /**

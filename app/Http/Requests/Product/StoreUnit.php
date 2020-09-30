@@ -26,6 +26,7 @@ class StoreUnit extends FormRequest
         return [
           'volumen' => 'required|min:3|max:30',
           'price' => 'required|numeric|min:1',
+          'quantity' => 'required|numeric|min:1',
           'sponsor' => 'required|numeric|min:.1',
           'supsponsor' => 'required|numeric|min:.1'
         ];

@@ -9,7 +9,7 @@ class Unit extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['volumen', 'price', 'sponsor', 'supsponsor'];
+    protected $fillable = ['volumen', 'price', 'quantity', 'sponsor', 'supsponsor', 'product_id'];
 
     public function product()
     {

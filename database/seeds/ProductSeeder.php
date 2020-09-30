@@ -19,12 +19,14 @@ class ProductSeeder extends Seeder
       $maiz->units()->create([
         'volumen' => 'cuartilla',
         'price' =>  5.5,
+        'quantity' => 6,
         'sponsor' => .25,
         'supsponsor' => .2
       ]);
       $maiz->units()->create([
         'volumen' => 'arroba',
         'price' =>  10,
+        'quantity' => 25,
         'sponsor' => 1,
         'supsponsor' => .7
       ]);
@@ -34,12 +36,14 @@ class ProductSeeder extends Seeder
       $trigo->units()->create([
         'volumen' => 'cuartilla',
         'price' =>  6,
+        'quantity' => 6,
         'sponsor' => .25,
         'supsponsor' => .2
       ]);
       $trigo->units()->create([
         'volumen' => 'arroba',
         'price' =>  11,
+        'quantity' => 25,
         'sponsor' => 1,
         'supsponsor' => .7
       ]);
@@ -49,12 +53,14 @@ class ProductSeeder extends Seeder
       $mani->units()->create([
         'volumen' => 'cuartilla',
         'price' =>  7,
+        'quantity' => 6,
         'sponsor' => .25,
         'supsponsor' => .2
       ]);
       $mani->units()->create([
         'volumen' => 'arroba',
         'price' =>  12,
+        'quantity' => 25,
         'sponsor' => 1,
         'supsponsor' => .7
       ]);

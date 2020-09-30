@@ -130,5 +130,5 @@ class UserTest extends TestCase
       $this->get('/clients?name=fre')->assertSee('FREDDY LUQUE');
       $this->get('/clients?name=bo')->assertSee('No Hay Clientes');
     }
-
+    //editar: telefono y direccion.
 }

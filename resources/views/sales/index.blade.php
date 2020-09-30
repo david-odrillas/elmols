@@ -6,18 +6,20 @@
       <thead>
         <tr>
           <th scope="col" class="h3 col-md-6">Registro de Ventas</th>
-          <th colspan="3" />
+          <th colspan="4" />
         </tr>
         <tr>
           <th>Fecha</th>
+          <th>Nro</th>
           <th>Valor</th>
-          <th>cliente</th>
+          <th>Cliente</th>
         </tr>
       </thead>
       <tbody>
         @forelse($sales as $sale)
         <tr>
-          <td scope="row">{{$sale->created_at}}</td>
+          <td scope="row"> {{$sale->created_at}}</td>
+          <td>{{$sale->id}}</td>
 
           <td>
             {{$sale->amount}}

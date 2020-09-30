@@ -8,7 +8,7 @@
   <section class="row">
     <div class="col-md-8" id="search">
       <div class="input-group">
-        <input type="search" class="form-control" placeholder="Producto" name="name" autocomplete="off" id="search-product">
+        <input type="search" class="form-control" placeholder="Producto" name="name" autocomplete="off" id="search-product" autofocus>
       </div>
       <div class="list-group position-absolute" style="z-index:2000; width:96%" id="list-product">
       </div>

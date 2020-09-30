@@ -18,6 +18,7 @@ class CreateUnitsTable extends Migration
           $table->foreignId('product_id')->constrained();
           $table->string('volumen');
           $table->float('price');
+          $table->integer('quantity');
           $table->float('sponsor');
           $table->float('supsponsor');
           $table->timestamps();

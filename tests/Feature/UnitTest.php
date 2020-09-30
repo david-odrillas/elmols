@@ -4,7 +4,7 @@ namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use Tests\TestCase; 
+use Tests\TestCase;
 
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
@@ -26,6 +26,7 @@ class UnitTest extends TestCase
       $maiz->units()->create([
         'volumen' => 'arroba',
         'price' =>  10,
+        'quantity' => 25,
         'sponsor' => 1,
         'supsponsor' => .7
       ]);
@@ -38,6 +39,7 @@ class UnitTest extends TestCase
       $maiz->units()->create([
         'volumen' => 'arroba',
         'price' =>  10,
+        'quantity' => 25,
         'sponsor' => 1,
         'supsponsor' => .7
       ]);
@@ -54,6 +56,7 @@ class UnitTest extends TestCase
       $maiz->units()->create([
         'volumen' => 'arroba',
         'price' =>  10,
+        'quantity' => 25,
         'sponsor' => 1,
         'supsponsor' => .7
       ]);
@@ -70,6 +73,7 @@ class UnitTest extends TestCase
       $maiz->units()->create([
         'volumen' => 'arroba',
         'price' =>  10,
+        'quantity' => 25,
         'sponsor' => 1,
         'supsponsor' => .7
       ]);
@@ -103,6 +107,7 @@ class UnitTest extends TestCase
       $maiz->units()->create([
         'volumen' => 'arroba',
         'price' =>  10,
+        'quantity' => 25,
         'sponsor' => 1,
         'supsponsor' => .7
       ]);
@@ -124,6 +129,7 @@ class UnitTest extends TestCase
       $maiz->units()->create([
         'volumen' => 'arroba',
         'price' =>  10,
+        'quantity' => 25,
         'sponsor' => 1,
         'supsponsor' => .7
       ]);
@@ -143,6 +149,7 @@ class UnitTest extends TestCase
       $unit = $maiz->units()->create([
         'volumen' => 'arroba',
         'price' =>  10,
+        'quantity' => 25,
         'sponsor' => 1,
         'supsponsor' => .7
       ]);
@@ -194,7 +201,7 @@ class UnitTest extends TestCase
       $this->actingAs($user);
       $this->get('/products/1/units')->assertSee('Agregar Unidad');
       $this->get('/products/1/units/create')->assertSee('Crear Unidad');
-      $this->post('/products/1/units', ['volumen' => 'arroba', 'price' =>  10, 'sponsor' => 1,     'supsponsor' => .7])->assertRedirect('products/1/units');
+      $this->post('/products/1/units', ['volumen' => 'arroba', 'price' =>  10, 'quantity' => 25,'sponsor' => 1,     'supsponsor' => .7])->assertRedirect('products/1/units');
       $this->assertDatabaseHas('units', ['volumen' => 'ARROBA']);
     }
     /*
@@ -206,6 +213,7 @@ class UnitTest extends TestCase
       $maiz->units()->create([
         'volumen' => 'arroba',
         'price' =>  10,
+        'quantity' => 25,
         'sponsor' => 1,
         'supsponsor' => .7
       ]);
@@ -218,6 +226,7 @@ class UnitTest extends TestCase
       $maiz->units()->create([
         'volumen' => 'arroba',
         'price' =>  10,
+        'quantity' => 25,
         'sponsor' => 1,
         'supsponsor' => .7
       ]);
@@ -237,6 +246,7 @@ class UnitTest extends TestCase
       $unit = $product->units()->create([
         'volumen' => 'arroba',
         'price' =>  10,
+        'quantity' => 25,
         'sponsor' => 1,
         'supsponsor' => .7
       ]);
@@ -248,8 +258,7 @@ class UnitTest extends TestCase
       $user->assignRole('admin');
       $this->actingAs($user);
       $this->get("/products/{$product->id}/units/{$unit->id}/edit")->assertSee('Modificar Unidad');
-      $this->put("/products/{$product->id}/units/{$unit->id}",['volumen' =>'kilo', 'price' =>  10,
-      'sponsor' => 1, 'supsponsor' => .7])->assertRedirect('products/1/units');
+      $this->put("/products/{$product->id}/units/{$unit->id}",['volumen' =>'kilo', 'price' =>  10, 'quantity' => 25, 'sponsor' => 1, 'supsponsor' => .7])->assertRedirect('products/1/units');
       $this->assertDatabaseHas('units', ['volumen' => 'KILO']);
     }
 }

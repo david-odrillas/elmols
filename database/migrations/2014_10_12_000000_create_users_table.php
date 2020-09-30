@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('ci');
             $table->string('cell');
             $table->string('email')->unique();
+            $table->string('address')->nullable();
             $table->foreignId('user_id')->nullable()->constrained();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
@@ -26,6 +27,7 @@ class CreateUsersTable extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
+      //  DB::update("ALTER TABLE users AUTO_INCREMENT = 49;");
     }
 
     /**

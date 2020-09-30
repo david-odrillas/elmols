@@ -25,6 +25,11 @@
                     <a class="nav-link" href="{{ route('sales.index') }}">{{ __('Ventas') }}</a>
                 </li>
               @endcan
+              @can('sales.index')
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('reports.select') }}">{{ __('Reportes') }}</a>
+                </li>
+              @endcan
             </ul>
 
             <!-- Right Side Of Navbar -->

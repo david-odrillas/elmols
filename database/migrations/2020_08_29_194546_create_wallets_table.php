@@ -19,6 +19,7 @@ class CreateWalletsTable extends Migration
             $table->foreignId('detail_id')->nullable()->constrained();
             $table->double('amount');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

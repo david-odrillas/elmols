@@ -35,7 +35,7 @@ class ReportController extends Controller
     $products = Product::join('units', 'units.product_id','=', 'products.id')
       ->join('details', 'details.unit_id', '=', 'units.id')
       ->select('products.name', 'details.quantity', 'units.volumen', 'details.sale_id',DB::raw('units.quantity *details.quantity as total'))
-      ->whereDay('details.created_at', '=', $date)
+      ->whereDate('details.created_at', '=', $date) //corregir dia del mes a;o
       ->where('products.id',$request->product)
       ->get();
     return view('reports.sales',compact('products'));

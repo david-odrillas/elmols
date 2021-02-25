@@ -14,55 +14,58 @@ class ProductSeeder extends Seeder
     public function run()
     {
       $maiz = Product::create([
-        'name' => 'maiz'
+        'name' => 'maiz cubano'
       ]);
       $maiz->units()->create([
-        'volumen' => 'cuartilla',
-        'price' =>  5.5,
-        'quantity' => 6,
-        'sponsor' => .25,
-        'supsponsor' => .2
+        'volumen' => 'quintal',
+        'price' =>  80,
+        'quantity' => 100,
+        'gain' => 7,
+        'accumulate' => 1,
+        'sponsor' => 1,
+        'supsponsor' => .5
       ]);
       $maiz->units()->create([
         'volumen' => 'arroba',
-        'price' =>  10,
+        'price' =>  21,
         'quantity' => 25,
-        'sponsor' => 1,
-        'supsponsor' => .7
-      ]);
-      $trigo = Product::create([
-        'name' => 'trigo'
-      ]);
-      $trigo->units()->create([
-        'volumen' => 'cuartilla',
-        'price' =>  6,
-        'quantity' => 6,
-        'sponsor' => .25,
+        'gain' => 2.8,
+        'accumulate' => 1,
+        'sponsor' => .6,
         'supsponsor' => .2
       ]);
-      $trigo->units()->create([
+      $maiz = Product::create([
+        'name' => 'maiz criollo'
+      ]);
+      $maiz->units()->create([
+        'volumen' => 'quintal',
+        'price' =>  155,
+        'quantity' => 100,
+        'gain' => 15,
+        'accumulate' => 1,
+        'sponsor' => 2,
+        'supsponsor' => 1
+      ]);
+      $amarillo = Product::create([
+        'name' => 'H. Amarillo C.'
+      ]);
+      $amarillo->units()->create([
+        'volumen' => 'quintal',
+        'price' =>  90,
+        'quantity' => 100,
+        'gain' => 14,
+        'accumulate' => 1,
+        'sponsor' => 2,
+        'supsponsor' => 1
+      ]);
+      $amarillo->units()->create([
         'volumen' => 'arroba',
-        'price' =>  11,
+        'price' => 25,
         'quantity' => 25,
+        'gain' => 6,
+        'accumulate' => 1,
         'sponsor' => 1,
-        'supsponsor' => .7
-      ]);
-      $mani = Product::create([
-        'name' => 'mani'
-      ]);
-      $mani->units()->create([
-        'volumen' => 'cuartilla',
-        'price' =>  7,
-        'quantity' => 6,
-        'sponsor' => .25,
-        'supsponsor' => .2
-      ]);
-      $mani->units()->create([
-        'volumen' => 'arroba',
-        'price' =>  12,
-        'quantity' => 25,
-        'sponsor' => 1,
-        'supsponsor' => .7
+        'supsponsor' => .5
       ]);
     }
 }

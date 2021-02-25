@@ -38,6 +38,32 @@
     </div>
 </div>
 <div class="form-group row">
+    <label for="gain" class="col-md-2 col-form-label text-md-right">{{ __('Ganancia') }}</label>
+
+    <div class="col-md-8">
+        <input id="gain" type="text" class="form-control @error('gain') is-invalid @enderror" name="gain" value="{{ old('gain', $unit->gain) }}" required>
+
+        @error('gain')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+    </div>
+</div>
+<div class="form-group row">
+    <label for="acumulate" class="col-md-2 col-form-label text-md-right">{{ __('Acumula') }}</label>
+
+    <div class="col-md-8">
+        <input id="accumulate" type="text" class="form-control @error('accumulate') is-invalid @enderror" name="accumulate" value="{{ old('accumulate', $unit->accumulate) }}" required>
+
+        @error('accumulate')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+    </div>
+</div>
+<div class="form-group row">
     <label for="sponsor" class="col-md-2 col-form-label text-md-right">{{ __('Patrocinador') }}</label>
 
     <div class="col-md-8">

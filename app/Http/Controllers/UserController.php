@@ -28,7 +28,7 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-      $users = User::select(['id', 'name', 'ci', 'cell'])
+      $users = User::select(['id', 'name', 'ci', 'cell', 'address'])
         ->orderBy('name', 'ASC')
         ->name($request->get('name'))
         ->paginate(10);
@@ -76,9 +76,9 @@ class UserController extends Controller
      * @param  \App\Unit  $unit
      * @return \Illuminate\Http\Response
      */
-    public function edit(Unit $unit)
+    public function edit(User $client)
     {
-        //
+      return view('clients.edit', compact('client'));
     }
 
     /**
@@ -88,9 +88,11 @@ class UserController extends Controller
      * @param  \App\Unit  $unit
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Unit $unit)
+    public function update(Request $request, User $client)
     {
-        //
+      $client->update($request->all());
+      Message::success('Cliente Actualizado');
+      return redirect()->route('clients.index');
     }
 
     /**

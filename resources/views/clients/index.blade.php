@@ -20,12 +20,14 @@
           <th>-</th>
           <th>-</th>
           <th>-</th>
+          <th>-</th>
         </tr>
       </thead>
       <tbody>
         @forelse($users as $user)
         <tr>
-          <td scope="row">{{$user->name}}</td>
+          <td scope="row">{{$user->name}} <small class="font-weight-lighter">{{$user->address}}</small>
+          </td>
           <td>
             {{$user->ci}}
           </td>
@@ -33,6 +35,11 @@
             {{$user->cell}}
           </td>
           <td>{{$user->id}}</td>
+          <td>
+            @can ('users.index')
+              <a class="btn btn-primary btn-block" href="{{ route('clients.edit', $user->id) }}" role="button">Editar</a>
+            @endcan
+          </td>
           <td>
             @can ('users.index')
               <a class="btn btn-primary btn-block" href="{{ route('clients.refers.index', $user->id) }}" role="button">Referidos</a>

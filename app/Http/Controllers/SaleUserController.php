@@ -59,6 +59,10 @@ class SaleUserController extends Controller
             'unit_id' => $request->unit_id[$i],
             'quantity' => $request->quantity[$i],
           ]);
+          $detail->wallets()->create([
+            'user_id' => $client->id,
+            'amount'  => Unit::find($request->unit_id[$i])->accumulate * $request->quantity[$i],
+          ]);
           if($client->sponsor)
           {
             $detail->wallets()->create([
